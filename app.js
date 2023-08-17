@@ -62,3 +62,27 @@ const cards = document.querySelectorAll(".card");
 for (let card of cards) {
   card.classList.add("new-card");
 }
+
+/**END OF CREATING CONTENT WTIH JAVASCRIPT SECTION */
+
+/**EXAMPLE: ADD AN EVENT LISTENER TO THE PROJECT */
+
+// document.addEventListener("click", function() {
+//   const mainHeading = document.querySelector("h1");
+//   mainHeading.style.backgroundColor = "red";
+// });
+
+/** EXERCISE: ADD A LISTENER */
+
+const header = document.querySelector("h1");
+const originalText = header.textContent;
+const updatedText = "Build an AR App";
+
+header.addEventListener("mouseover", function() {
+  header.textContent = updatedText;
+});
+
+header.addEventListener("mouseout", function() {
+  header.textContent = originalText;
+});
+
