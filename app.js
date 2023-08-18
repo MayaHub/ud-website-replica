@@ -130,19 +130,18 @@ for (let card of cards) {
  */
 
 document.addEventListener("click", disappear);
-// document.removeEventListener("click", disappear);
-const hero = document.querySelector(".hero__module");
-  
 
+const hero = document.querySelector(".hero__module");
+const lastCard = hero.lastElementChild;
 
 function disappear() {
   //removes last element (child) from the hero--module element
-  const lastCard = hero.lastElementChild;
   hero.removeChild(lastCard);
-  console.log("disappeared")
+  // console.log("disappeared")
 }
 
 function gone() {
   //remove event listener after it's been triggered
-  
+  hero.removeChild(lastCard);
+  document.removeEventListener("click", gone);
 }
