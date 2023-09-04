@@ -45,13 +45,14 @@ adviceHeader.insertAdjacentHTML("afterend", adviceString);
 /**EXERCISE: STYLE PAGE CONTENT */
 
 //find button with id "start-now" & use style property change background color and border radius
+
 const btn = document.querySelector("#start-now");
 btn.style.borderRadius = "5rem";
 btn.style.backgroundColor = "#2015ff";
 
-//USE CLASSLIST METHODS TO ADD A NEW CLASS
+//***USE CLASSLIST METHODS TO ADD A NEW CLASS***
 //Add new-hero class to the section with the hero--homepage class
-const cardList = document.querySelector('.hero--homepage');
+const cardList = document.querySelector(".hero--homepage");
 cardList.classList.add("new-hero");
 
 //Add the new-card class to all of the elements with the card class
@@ -62,10 +63,7 @@ const cards = document.querySelectorAll(".card");
 for (let card of cards) {
   card.classList.add("new-card");
 }
-
 /**END OF CREATING CONTENT WTIH JAVASCRIPT SECTION */
-
-
 
 /** ADD AN EVENT LISTENER TO THE PROJECT */
 
@@ -91,57 +89,91 @@ for (let card of cards) {
 // header.addEventListener("mouseover", hover);
 // header.addEventListener("mouseout", away);
 
-
 //EXERCISE: REMOVE AN EVENT LISTENER
 // header.removeEventListener("mouseover", hover);
 // header.removeEventListener("mouseout", away);
 
-
-/** EXPLANATION: ADD/REMOVE AN EVENT LISTENER 
- * 
- * In order to remove an event listener, the same function that was passed into the addEventListener() must be passed into the remmoveEventListener().
- * 
+/** EXPLANATION: ADD/REMOVE AN EVENT LISTENER
+ *
+ * In order to remove an event listener, the same function that was passed into the addEventListener() must be passed into the removeEventListener().
+ *
  * EXAMPLE OF WRONG WAY:
- * 
+ *
  * Inserting this function into the add/remove events will point to two different locations and the remove will fail:
- * 
- * function() { 
+ *
+ * function() {
  * header.textContent = originalText;
  * }
- * 
+ *
  * function() {
  * header.textContent = updated text:
  * }
- * 
- * 
+ *
+ *
  * In the example above, the statements that are executed by adding the function to both the add/remove listeners and need to be converted into a function that can be passed into the add/remove function parameters.
- * 
+ *
  * Passing the statements as above creates an object. Using the statement a second time will create a new object instead of pointing to the one that was added.
- * 
+ *
  * I created functions for each event listener and replaced the statements to ensure each listener points to the same object.
- * 
-*/
-
-
-
+ *
+ */
 
 /** EXERCISE: REMOVE AN EVENT LISTENER
  *    Create a one-time use event listener
  */
 
-document.addEventListener("click", disappear);
+// const hero = document.querySelector(".hero__module");
+// const lastCard = hero.lastElementChild;
 
-const hero = document.querySelector(".hero__module");
-const lastCard = hero.lastElementChild;
+// document.addEventListener("click", function() {
+//   hero.removeChild(lastCard);
+// });
 
-function disappear() {
-  //removes last element (child) from the hero--module element
-  hero.removeChild(lastCard);
-  // console.log("disappeared")
+// document.removeEventListener("click", function() {
+//   hero.removeChild(lastCard);
+// });
+
+/** THE DEFAULT ACTION
+ *
+ * Use the event object to invoke the .preventDefault() method, which a handler can call to prevent the default action from occurring
+ */
+
+/**  EXERCISE: ADD FAVORITES BUTTONS */
+
+const cardContainer = document.querySelector(".contain--none"); //large container of all cards in section
+
+// const cardContent = document.querySelectorAll(".card__container");
+
+const nanoTitle = document.querySelector(".card--nanodegree__title"); //selects Title in card
+
+//create new button element
+const toggleBtn = document.createElement("button");
+
+// text for button element to be toggled
+const starterText = "Add to Favorites";
+const clickText = "Remove From Favorites";
+
+//set text for button
+toggleBtn.textContent = starterText;
+
+// add button to card after title div
+nanoTitle.appendChild(toggleBtn);
+
+// add class(es) to button element
+toggleBtn.classList.add("button");
+toggleBtn.classList.add("button--primary");
+
+// toggle function that changes text when clicked and prevents URL navigation
+function change(e) {
+  if (toggleBtn.textContent == starterText) {
+    toggleBtn.textContent = clickText;
+  } else {
+    toggleBtn.textContent = starterText;
+  }
+  e.preventDefault();
 }
 
-function gone() {
-  //remove event listener after it's been triggered
-  hero.removeChild(lastCard);
-  document.removeEventListener("click", gone);
-}
+// click event for button/toggle
+toggleBtn.addEventListener("click", change);
+
+// AT THIS POINT, THE CODE IS FUNCTIONAL AND IS PRESENTING ON CARD 1 OF 6. NEXT STEP IS TO FIND OUT HOW TO APPLY BUTTON ELEMENT TO EACH CARD AND ADD FAVORITE STATUS
